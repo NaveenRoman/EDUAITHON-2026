@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — EduAIthon 2026</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://ictiee.org/ictiee2026/wp-content/uploads/2023/02/favicon-2.png" type="image/png">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1a202c;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #FFD700, #B8860B, #FFD700);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 8s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    .accordion-item {
+      background-color: #f9fafb;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #d1d5db;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-item.active {
+      border-left-color: #FFD700;
+      background-color: #fffbe6;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+    .accordion-header {
+      cursor: pointer;
+      padding: 1.25rem 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      position: relative;
+    }
+
+    .accordion-header::after {
+      content: '+';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: #B8860B;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-header::after {
+      content: '-';
+    }
+
+    .accordion-content {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      color: #4b5563;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    .accordion-content p {
+      padding-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto flex items-center justify-between py-3 px-4 sm:px-6 lg:px-8">
+      <!-- Left: Logos + Title -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <div class="flex items-center space-x-2">
+          <img src="https://ictiee.org/ictiee2026/wp-content/uploads/2025/04/ICTIEE-2026.png"
+               alt="ICTIEE 2026 Logo" class="h-5 sm:h-6 w-auto">
+          <img src="https://ictiee.org/ictiee2026/wp-content/uploads/2023/02/IUCEE-Foundation.jpg"
+               alt="IUCEE Logo" class="h-5 sm:h-6 w-auto"
+               onerror="this.onerror=null; this.src='https://placehold.co/100x35/002244/FFF?text=IUCEE';">
+        </div>
+        <a href="index.html" class="gradient-text text-lg sm:text-xl font-extrabold tracking-tight">
+          EduAIthon
+        </a>
+      </div>
+
+      <!-- Right: Navigation -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <ul class="hidden md:flex items-center space-x-5 text-sm font-semibold" id="navLinks">
+          <li><a href="index.html" class="text-gray-600 hover:text-[#38A169]">Home</a></li>
+          <li><a href="about.html" class="text-gray-600 hover:text-[#38A169]">About</a></li>
+          <li><a href="event.html" class="text-gray-600 hover:text-[#38A169]">Event</a></li>
+          <li><a href="register.html" class="text-gray-600 hover:text-[#38A169]">Registration</a></li>
+          <li><a href="help.html" class="text-gray-600 hover:text-[#38A169]">Help Desk</a></li>
+          <li><a href="faq.html" class="text-[#38A169] border-b-2 border-[#FFD700] pb-1">FAQ</a></li>
+        </ul>
+
+        <!-- Mobile menu button -->
+        <div id="menuToggle" class="flex flex-col justify-between w-6 h-4 cursor-pointer md:hidden">
+          <span class="block h-[2px] bg-gray-700 rounded"></span>
+          <span class="block h-[2px] bg-gray-700 rounded"></span>
+          <span class="block h-[2px] bg-gray-700 rounded"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile dropdown -->
+    <div id="mobileMenu" class="hidden flex flex-col items-center bg-gray-50 py-3 md:hidden space-y-3">
+      <a href="index.html" class="text-gray-700 hover:text-[#38A169]">Home</a>
+      <a href="about.html" class="text-gray-700 hover:text-[#38A169]">About</a>
+      <a href="event.html" class="text-gray-700 hover:text-[#38A169]">Event</a>
+      <a href="register.html" class="text-gray-700 hover:text-[#38A169]">Registration</a>
+      <a href="help.html" class="text-gray-700 hover:text-[#38A169]">Help Desk</a>
+      <a href="faq.html" class="text-[#38A169] border-b border-[#FFD700]">FAQ</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="gradient-text text-4xl sm:text-5xl font-extrabold mb-3">Frequently Asked Questions</h1>
+        <p class="text-lg text-gray-600">Have questions? We've got answers.</p>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">Who is eligible to participate?</div>
+          <div class="accordion-content">
+            <p>EduAIthon 2026 is open to all undergraduate and postgraduate students from any institution. Teams from all disciplines are welcome.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">What is the team size limit?</div>
+          <div class="accordion-content">
+            <p>Teams can have 3 to 4 members. Interdisciplinary collaboration is encouraged to promote creative and well-rounded solutions.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Do I need an idea before registering?</div>
+          <div class="accordion-content">
+            <p>You must submit a short idea summary (300 words max) and a problem statement (150 words max). Ideas can evolve during the event.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Is there a registration fee?</div>
+          <div class="accordion-content">
+            <p>Registration details, including fees (if any), will be announced on the official registration portal. Most student teams participate free of cost.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">What are the official event themes?</div>
+          <div class="accordion-content">
+            <p>Key themes include: AI in Education, Digital Twins, Sustainability, AR/VR for Learning, and Social Impact Solutions.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Will we receive mentorship?</div>
+          <div class="accordion-content">
+            <p>Yes. Each team will be assigned a mentor, and experts will conduct mentoring and feedback sessions during the event.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">What are the judging criteria?</div>
+          <div class="accordion-content">
+            <p>Projects will be judged based on innovation, implementation, impact, presentation, teamwork, and scalability.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">What prizes are offered?</div>
+          <div class="accordion-content">
+            <p>Top teams will receive cash prizes, certificates, and mentorship opportunities. Winning projects may also be showcased at ICTIEE 2026.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Will accommodation be provided?</div>
+          <div class="accordion-content">
+            <p>Accommodation will be provided for outstation participants on a first-come-first-serve basis. Details will be shared with selected teams.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">What are the important dates?</div>
+          <div class="accordion-content">
+            <p>Registration opens in December 2025. The main event will take place during ICTIEE 2026 in January.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Are we allowed to use pre-built tools or APIs?</div>
+          <div class="accordion-content">
+            <p>Yes, open-source tools and APIs are allowed, provided they are credited. The main functionality must be built during the hackathon.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Who owns the project IP?</div>
+          <div class="accordion-content">
+            <p>All intellectual property belongs to the participants. Organizers may showcase your project for event promotion with proper credit.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">Will certificates be provided?</div>
+          <div class="accordion-content">
+            <p>Yes, participation certificates will be provided to all participants. Winners will receive special recognition certificates.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">How can I contact the organizers?</div>
+          <div class="accordion-content">
+            <p>You can reach us via the <a href="help.html" class="text-[#38A169] font-semibold">Help Desk</a> or email <a href="mailto:eduaithon@ictiee.org" class="text-[#38A169] font-semibold">eduaithon@ictiee.org</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 border-t border-gray-200 mt-16 py-8">
+    <div class="container text-center text-gray-600 text-sm font-medium">
+      <p>© IUCEE – EduAIthon 2026 |
+        <a href="#" class="text-[#38A169] hover:text-black">Contact</a> |
+        <a href="#" class="text-[#38A169] hover:text-black">Terms</a> |
+        <a href="#" class="text-[#38A169] hover:text-black">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.accordion-item');
+      items.forEach(item => {
+        item.querySelector('.accordion-header').addEventListener('click', () => {
+          const open = item.classList.contains('active');
+          items.forEach(i => {
+            i.classList.remove('active');
+            i.querySelector('.accordion-content').style.maxHeight = 0;
+          });
+          if (!open) {
+            item.classList.add('active');
+            const content = item.querySelector('.accordion-content');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        });
+      });
+
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

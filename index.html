@@ -14,11 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
 
     <style>
-        /* Custom styles to integrate with Tailwind and provide necessary non-utility styling */
         :root {
-            /* GOLD/GREEN Palette */
+
             --primary-color: #FFD700;
-            /* Gold */
+
             --secondary-color: #008000;
             /* Green (Darker) */
             --accent-color: #38A169;
@@ -243,103 +242,170 @@
         }
 
         /* --- Chatbot Styles --- */
-        #chat-icon-container {
-            z-index: 100;
-        }
+      :root {
+    --primary-color: #FFD700; /* Gold */
+    --secondary-color: #008000; /* Dark Green */
+    --accent-color: #38A169; /* Medium Green */
+}
 
-        #chat-window {
-            z-index: 99;
-            transform: scale(0.8);
-            /* Start smaller */
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            transform-origin: bottom right;
-        }
+/* --- Chat Toggle Button --- */
+#chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: #1a202c;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.8rem;
+    line-height: 56px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.5);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
 
-        #chat-window.open {
-            transform: scale(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
+#chat-toggle:hover {
+    background-color: #e6a700;
+    transform: scale(1.05);
+}
 
-        .chat-message {
-            max-width: 85%;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.75rem;
-            margin-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
+/* --- Chat Widget --- */
+#chat-widget {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 450px;
+    background-color: #1a202c;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+    transform: translateY(10px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
-        .user-message {
-            background-color: var(--accent-color);
-            /* Green Accent */
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 0;
-        }
+#chat-widget.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
 
-        .bot-message {
-            background-color: #f3f4f6;
-            /* Light gray */
-            color: #1f2937;
-            /* Dark text */
-            margin-right: auto;
-            border-bottom-left-radius: 0;
-        }
+/* --- Chat Header --- */
+.chat-header {
+    background-color: var(--primary-color);
+    color: #1a202c;
+    padding: 15px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
 
-        /* Sponsor Section Overrides */
-        .sponsor-image {
-            transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        }
+/* --- Chat Messages --- */
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #0d1117;
+    border-bottom: 1px solid #1f2937;
+    display: flex;
+    flex-direction: column;
+}
 
-        .sponsor-card.active .sponsor-image {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
 
-        .info-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+.bot-message {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    align-self: flex-start;
+}
 
-        .sponsor-card.active .info-panel {
-            max-height: 150px;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
+.user-message {
+    background-color: #0077b6;
+    color: white;
+    align-self: flex-end;
+}
 
-        .tap-prompt {
-            transition: opacity 0.3s ease-in-out;
-        }
+/* --- Typing Box (Simple Dots) --- */
+.typing-indicator {
+    display: inline-block;
+    background-color: #1f2937;
+    color: #FFD700;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 5px 0;
+    width: fit-content;
+}
 
-        .sponsor-card.active .tap-prompt {
-            opacity: 0;
-        }
+/* --- Chat Input --- */
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #1a202c;
+    border-top: 1px solid #2d3748;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    gap: 8px;
+}
 
-        /* --- Modal Styles --- */
-        #themeModal {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease-out;
-        }
+#chat-input-field {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    background-color: #0d1117;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+}
 
-        #themeModal.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+#chat-input-field:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 4px rgba(56, 161, 105, 0.6);
+}
 
-        #themeModal>div {
-            transform: scale(0.95);
-            transition: transform 0.3s ease-out;
-        }
+#chat-send-btn {
+    background-color: var(--accent-color);
+    color: #1a202c;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
 
-        #themeModal.open>div {
-            transform: scale(1);
-        }
+#chat-send-btn:hover {
+    background-color: #e6a700;
+}
+
+/* --- Responsive --- */
+@media (max-width: 400px) {
+    #chat-widget {
+        width: 90%;
+        right: 5%;
+        height: 400px;
+    }
+}
+
+
     </style>
 </head>
 
@@ -376,13 +442,13 @@
                             class="text-gray-600 hover:text-[#38A169] transition duration-150">Registration</a></li>
                     <li><a href="help.html" class="text-gray-600 hover:text-[#38A169] transition duration-150">Help
                             Desk</a></li>
-                    
+
                     <li><a href="faq.html" class="text-gray-600 hover:text-[#38A169] transition duration-150">FAQ</a>
                     </li>
-                    
+
                 </ul>
 
-                <div style="display: none;"> 
+                <div style="display: none;">
 
                     <button id="themeToggle"
                         class="theme-toggle p-1 rounded-full text-gray-600 hover:text-[#38A169] focus:outline-none focus:ring-2 focus:ring-green-400"
@@ -392,9 +458,9 @@
                             stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
-                        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="display: none;">
+                        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="display: none;">
                             <circle cx="12" cy="12" r="5"></circle>
                             <line x1="12" y1="1" x2="12" y2="3"></line>
                             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -409,7 +475,6 @@
                 </div>
 
                 <div class="menu-toggle" id="menuToggle"> <span></span>
-                    <span></span>
                     <span></span>
                 </div>
             </div>
@@ -668,16 +733,16 @@
                         background-clip: text;
                         color: transparent;
                     }
-            
+
                     .sponsor-image {
                         transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
                     }
-            
+
                     .sponsor-card.active .sponsor-image {
                         filter: grayscale(0%);
                         opacity: 1;
                     }
-            
+
                     .info-panel {
                         max-height: 0;
                         overflow: hidden;
@@ -685,31 +750,32 @@
                         padding-top: 0;
                         padding-bottom: 0;
                     }
-            
+
                     .sponsor-card.active .info-panel {
                         max-height: 150px;
                         padding-top: 0.5rem;
                         padding-bottom: 0.5rem;
                     }
-            
+
                     .tap-prompt {
                         transition: opacity 0.3s ease-in-out;
                     }
-            
+
                     .sponsor-card.active .tap-prompt {
                         opacity: 0;
                     }
                 </style>
-            
+
                 <div class="section-wrapper py-12 md:py-20">
                     <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="section-header text-center mb-12">
-                            <h2 class="sponsor-gradient-text text-4xl md:text-5xl font-extrabold mb-3">Our Valued Partners
+                            <h2 class="sponsor-gradient-text text-4xl md:text-5xl font-extrabold mb-3">Our Valued
+                                Partners
                             </h2>
                             <p class="text-gray-700 text-lg">Leading organizations powering innovation in education and
                                 technology.</p>
                         </div>
-            
+
                         <div class="flex flex-col items-center space-y-8">
                             <div class="w-full max-w-md">
                                 <h3
@@ -735,7 +801,7 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <div class="w-full max-w-md">
                                 <h3
                                     class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
@@ -760,7 +826,7 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
                                 <div>
                                     <h3
@@ -787,10 +853,10 @@
                                         </div>
                                     </div>
                                 </div>
-            
+
                                 <div>
                                     <h3
-                                        class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
+                                        class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase border-b-2 border-[#9D4EDD] pb-2">
                                         Institutional Sponsor
                                     </h3>
                                     <div id="sponsor-inst-0"
@@ -1038,6 +1104,37 @@
             </p>
         </div>
     </div>
+    <button id="chat-toggle" title="Open Help Chat">
+        <span class="open-icon">💬</span>
+        <span class="close-icon" style="display:none;">✕</span>
+    </button>
+
+    <div id="chat-widget">
+        <div class="chat-header">
+            EduAIthon Help Bot
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Initial bot message -->
+            <div class="message bot-message">
+                Hi! I'm the EduAIthon Help Bot. I can help with quick questions about the event.
+                <br><br>
+                **Common Questions:**
+                <ul>
+                    <li>- **Register:** How to join?</li>
+                    <li>- **Themes:** What are the topics?</li>
+                    <li>- **Date:** When is the event?</li>
+                </ul>
+                Type a keyword or ask your question!
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-field" placeholder="Type a message..." aria-label="Chat message input">
+            <button id="chat-send-btn" aria-label="Send message">➔</button>
+        </div>
+    </div>
+
+
+
 
 
     <script>
@@ -1231,6 +1328,135 @@
                 closeThemeModal();
             }
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatWidget = document.getElementById('chat-widget');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInputField = document.getElementById('chat-input-field');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            const openIcon = chatToggle ? chatToggle.querySelector('.open-icon') : null;
+            const closeIcon = chatToggle ? chatToggle.querySelector('.close-icon') : null;
+
+            const appendMessage = (text, type) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', type);
+                let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageDiv.innerHTML = formattedText.replace(/\n/g, '<br>');
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const showTypingIndicator = () => {
+                const typingDiv = document.createElement('div');
+                typingDiv.classList.add('typing-indicator');
+                typingDiv.innerHTML = `
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        `;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return typingDiv;
+            };
+
+            const getBotResponse = (input) => {
+                input = input.toLowerCase();
+
+                if (input.includes('register') || input.includes('join') || input.includes('apply')) {
+                    return "You can register directly from the **Registration page** on our site. Teams should have 3–5 members. Make sure to complete registration before the **deadline**!";
+                }
+
+                if (input.includes('theme') || input.includes('topics')) {
+                    return "EduAIthon 2026 focuses on five key themes:\n\n1️⃣ AI in Education\n2️⃣ Responsible AI\n3️⃣ Combating Misinformation\n4️⃣ AI for Well-being\n5️⃣ Digital Humanities";
+                }
+
+                if (input.includes('date') || input.includes('when') || input.includes('schedule') || input.includes('kick off')) {
+                    return "EduAIthon 2026 starts on **January 8, 2026**, as part of **ICTIEE 2026** at **VIT Bhopal University**!";
+                }
+
+                if (input.includes('location') || input.includes('venue')) {
+                    return "EduAIthon 2026 will be hosted **onsite at VIT Bhopal University, India**, during the **ICTIEE 2026 conference**.";
+                }
+
+                if (input.includes('prize') || input.includes('reward') || input.includes('award')) {
+                    return "Winning teams receive **certificates, recognition at ICTIEE 2026**, and an opportunity to **present at the IASF 2026 platform**. 🏆";
+                }
+
+                if (input.includes('mentor') || input.includes('guidance') || input.includes('support')) {
+                    return "Each team will have access to **expert mentors** who can guide your project. Mentor details will be shared after registration.";
+                }
+
+                if (input.includes('deadline') || input.includes('last date') || input.includes('submission')) {
+                    return "The **registration deadline** is **December 20, 2025**, and project submissions close by **January 6, 2026**.";
+                }
+
+                if (input.includes('eligibility') || input.includes('who can participate')) {
+                    return "EduAIthon 2026 is open to **students, educators, and innovators** passionate about using AI responsibly in education and society.";
+                }
+
+                if (input.includes('ictiee') || input.includes('conference') || input.includes('vit bhopal')) {
+                    return "ICTIEE 2026 is an international conference at **VIT Bhopal University**. EduAIthon 2026 is one of its featured hackathons!";
+                }
+
+                if (input.includes('team') || input.includes('members') || input.includes('size')) {
+                    return "Teams should consist of **3–5 members**. Interdisciplinary and cross-institution teams are encouraged!";
+                }
+
+                if (input.includes('contact') || input.includes('help desk') || input.includes('support')) {
+                    return "For any issues, visit our **Help Desk** page or email the organizing team via the **Contact** section on the site.";
+                }
+
+                if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
+                    return "Hello there! 👋 I'm the EduAIthon 2026 Bot. You can ask me about **registration, themes, prizes, deadlines, or venue**.";
+                }
+
+                return "Hmm... I’m not sure about that yet. Please check our **FAQ**, **Help Desk**, or official **EduAIthon 2026** website for more info.";
+            };
+
+            if (chatToggle && chatWidget) {
+                chatToggle.addEventListener('click', () => {
+                    const isOpen = chatWidget.classList.toggle('active');
+                    if (openIcon && closeIcon) {
+                        openIcon.style.display = isOpen ? 'none' : 'inline';
+                        closeIcon.style.display = isOpen ? 'inline' : 'none';
+                    }
+
+                    if (isOpen) {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        chatInputField.focus();
+                    }
+                });
+
+                const handleUserInput = () => {
+                    const userText = chatInputField.value.trim();
+                    if (userText === '') return;
+
+                    appendMessage(userText, 'user-message');
+                    chatInputField.value = '';
+                    chatInputField.disabled = true;
+                    chatSendBtn.disabled = true;
+
+                    const typingDiv = showTypingIndicator();
+
+                    setTimeout(() => {
+                        typingDiv.remove();
+                        const botResponse = getBotResponse(userText);
+                        appendMessage(botResponse, 'bot-message');
+                        chatInputField.disabled = false;
+                        chatSendBtn.disabled = false;
+                        chatInputField.focus();
+                    }, 1000);
+                };
+
+                chatSendBtn.addEventListener('click', handleUserInput);
+                chatInputField.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') handleUserInput();
+                });
+            }
+        });
+
     </script>
 </body>
 
